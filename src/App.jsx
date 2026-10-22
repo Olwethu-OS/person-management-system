@@ -1,7 +1,9 @@
 import axios from "axios";
 import Input from "./Input.jsx";
-
+import {Route, Routes} from "react-router";
+//import {BrowserRouter as Router,Route,Switch} from "react-router";
 import {useEffect, useState} from "react";
+import ViewAll from "./PeopleList.jsx";
 
 const App = () => {
     //creating state variables
@@ -34,7 +36,7 @@ const createPerson=async (event)=>{
 
 
 
-    const fetchPosts= async () => {
+   /* const fetchPosts= async () => {
         try {
             const response = await axios.get(
                 'http://localhost:8081/sendRequest');
@@ -44,7 +46,7 @@ const createPerson=async (event)=>{
             console.log(err);
         }
 
-    };
+    };*/
 
 
 
@@ -52,7 +54,7 @@ const createPerson=async (event)=>{
      const deletePerson = async (id)=>{
          const response=await axios.delete(`http://localhost:8081/sendRequest/deletePerson/${id}`);
          console.log(response.data);
-          fetchPosts();
+          ViewAll();
       };
     const editPerson = (person) => {
         setEditPerson(person);
@@ -64,6 +66,7 @@ const createPerson=async (event)=>{
         try{
             const response = await
                 axios.put(`http://localhost:8081/sendRequest/${editingPerson.id}`,
+
                     {name: name,
                     surname: surname,
                     age: Number(age)});
@@ -71,7 +74,8 @@ const createPerson=async (event)=>{
             setName("");
             setSurname("");
             setAge("");
-            fetchPosts();
+            ViewAll();
+
 
         }catch(err){
             console.log("Error updating",err);
@@ -81,7 +85,7 @@ const createPerson=async (event)=>{
 
 
   return (
-
+<Routes>
     <div className="grid  grid-rows-2 justify-items-center">
 
 
@@ -106,7 +110,9 @@ const createPerson=async (event)=>{
         <Input type="text" required placeholder="Enter your age" value={age} onChange={(event)=>setAge(event.target.value)}/>
           <div className="flex gap-30 my-10">
         <button className=" bg-blue-400 rounded-sm px-8 ml-2 cursor-pointer"  type="submit" >{editingPerson ? "update Person" :"Add Person"}</button>
-          <button className="bg-blue-400 rounded md px-8 cursor-pointer " type="button"  onClick={fetchPosts} >View All</button>
+          <button className="bg-blue-400 rounded md px-8 cursor-pointer " type="button"  onClick={
+              <Route path='' element={<ViewAll/>} />
+                                                                                         } >View All</button>
           </div>
 
       </form>
@@ -136,6 +142,7 @@ const createPerson=async (event)=>{
 
 
     </div>
+</Routes>
   );
 }
 
