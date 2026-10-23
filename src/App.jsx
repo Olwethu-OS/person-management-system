@@ -54,7 +54,7 @@ const createPerson=async (event)=>{
      const deletePerson = async (id)=>{
          const response=await axios.delete(`http://localhost:8081/sendRequest/deletePerson/${id}`);
          console.log(response.data);
-          ViewAll();
+          <ViewAll/>;
       };
     const editPerson = (person) => {
         setEditPerson(person);
@@ -74,7 +74,7 @@ const createPerson=async (event)=>{
             setName("");
             setSurname("");
             setAge("");
-            ViewAll();
+            <ViewAll/>;
 
 
         }catch(err){
@@ -85,64 +85,95 @@ const createPerson=async (event)=>{
 
 
   return (
-<Routes>
     <div className="grid  grid-rows-2 justify-items-center">
 
 
-      <form className="grid shadow-lg p-6 rounded-md" onSubmit={(event)=>{
-      event.preventDefault();
-      if(editingPerson){
-          updatePerson();
-      }
-      else
-          {
-              createPerson(event);
-      }
-      }}>
+      {/*<form className="grid shadow-lg p-6 rounded-md" onSubmit={(event)=>{*/}
+      {/*event.preventDefault();*/}
+      {/*if(editingPerson){*/}
+      {/*    updatePerson();*/}
+      {/*}*/}
+      {/*else*/}
+      {/*    {*/}
+      {/*        createPerson(event);*/}
+      {/*}*/}
+      {/*}}>*/}
 
-          <h1 className="text-3xl font-bold" >Personal Details</h1>
+      {/*    <h1 className="text-3xl font-bold" >Personal Details</h1>*/}
 
-        <label>First Name:</label>
-        <Input type="text" required placeholder="Enter your Name" value={name} onChange={(event)=>setName(event.target.value)}/>
-         <label>Last Name:</label>
-        <Input type="text" required placeholder="Enter your surname" value={surname} onChange={(event)=>setSurname(event.target.value)}/>
-         <label>Age:</label>
-        <Input type="text" required placeholder="Enter your age" value={age} onChange={(event)=>setAge(event.target.value)}/>
-          <div className="flex gap-30 my-10">
-        <button className=" bg-blue-400 rounded-sm px-8 ml-2 cursor-pointer"  type="submit" >{editingPerson ? "update Person" :"Add Person"}</button>
-          <button className="bg-blue-400 rounded md px-8 cursor-pointer " type="button"  onClick={
-              <Route path='' element={<ViewAll/>} />
-                                                                                         } >View All</button>
-          </div>
+      {/*  <label>First Name:</label>*/}
+      {/*  <Input type="text" required placeholder="Enter your Name" value={name} onChange={(event)=>setName(event.target.value)}/>*/}
+      {/*   <label>Last Name:</label>*/}
+      {/*  <Input type="text" required placeholder="Enter your surname" value={surname} onChange={(event)=>setSurname(event.target.value)}/>*/}
+      {/*   <label>Age:</label>*/}
+      {/*  <Input type="text" required placeholder="Enter your age" value={age} onChange={(event)=>setAge(event.target.value)}/>*/}
+      {/*    <div className="flex gap-30 my-10">*/}
+      {/*  <button className=" bg-blue-400 rounded-sm px-8 ml-2 cursor-pointer"  type="submit" >{editingPerson ? "update Person" :"Add Person"}</button>*/}
+      {/*    <button className="bg-blue-400 rounded md px-8 cursor-pointer " type="button"  onClick={()=>{<ViewAll/>}} >View All</button>*/}
+      {/*    </div>*/}
 
-      </form>
+      {/*</form>*/}
 
 
-        <table className="border border-collapse mt-20 w-100 h-20">
-            <thead>
-            <tr>
-                <th className="border">Name</th>
-                <th className="border">Surname</th>
-                <th className="border">Age</th>
-                <th colSpan="2" className="border">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            {posts.map((person)=>(
-            <tr key={person.id}>
-                <td className="border">{person.name}</td>
-                <td className="border">{person.surname}</td>
-                <td className="border">{person.age}</td>
-                    <td className="border bg-green-400 rounded-md cursor-pointer" > <button type="button" onClick={()=>editPerson(person)}>Edit</button></td>
-                <td className="border bg-red-400 rounded-md cursor-pointer"> <button type="button" onClick={()=>deletePerson(person.id)}>Delete</button></td>
-            </tr>
-            ))}
-            </tbody>
-        </table>
+        {/*<table className="border border-collapse mt-20 w-100 h-20">*/}
+        {/*    <thead>*/}
+        {/*    <tr>*/}
+        {/*        <th className="border">Name</th>*/}
+        {/*        <th className="border">Surname</th>*/}
+        {/*        <th className="border">Age</th>*/}
+        {/*        <th colSpan="2" className="border">Action</th>*/}
+        {/*    </tr>*/}
+        {/*    </thead>*/}
+        {/*    <tbody>*/}
+        {/*    {posts.map((person)=>(*/}
+        {/*    <tr key={person.id}>*/}
+        {/*        <td className="border">{person.name}</td>*/}
+        {/*        <td className="border">{person.surname}</td>*/}
+        {/*        <td className="border">{person.age}</td>*/}
+        {/*            <td className="border bg-green-400 rounded-md cursor-pointer" > <button type="button" onClick={()=>editPerson(person)}>Edit</button></td>*/}
+        {/*        <td className="border bg-red-400 rounded-md cursor-pointer"> <button type="button" onClick={()=>deletePerson(person.id)}>Delete</button></td>*/}
+        {/*    </tr>*/}
+        {/*    ))}*/}
+        {/*    </tbody>*/}
+        {/*</table>*/}
+
+        <Routes>
+            <Route path='/' element={
+                                 <form className="grid shadow-lg p-6 rounded-md" onSubmit={(event)=>{
+                                    event.preventDefault();
+                                    if(editingPerson){
+                                        updatePerson();
+                                    }
+                                    else
+                                    {
+                                        createPerson(event);
+                                    }
+                                }}>
+
+                                    <h1 className="text-3xl font-bold" >Personal Details</h1>
+
+                                    <label>First Name:</label>
+                                    <Input type="text" required placeholder="Enter your Name" value={name} onChange={(event)=>setName(event.target.value)}/>
+                                    <label>Last Name:</label>
+                                    <Input type="text" required placeholder="Enter your surname" value={surname} onChange={(event)=>setSurname(event.target.value)}/>
+                                    <label>Age:</label>
+                                    <Input type="text" required placeholder="Enter your age" value={age} onChange={(event)=>setAge(event.target.value)}/>
+                                    <div className="flex gap-30 my-10">
+                                        <button className=" bg-blue-400 rounded-sm px-8 ml-2 cursor-pointer"  type="submit" >{editingPerson ? "update Person" :"Add Person"}</button>
+                                        <button className="bg-blue-400 rounded md px-8 cursor-pointer " type="button"  onClick={()=>{<ViewAll/>}} >View All</button>
+                                    </div>
+
+                                </form>
+
+
+                            }/>
+            <Route path='/view-people' element={<ViewAll/>}/>
+
+        </Routes>
 
 
     </div>
-</Routes>
+
   );
 }
 

@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 
 const ViewAll=()=>{
@@ -15,16 +15,21 @@ const ViewAll=()=>{
                 console.log(err);
             }
     };
+    useEffect(() => {
+        fetchAll();
+    }, []);
 
     return(
             <table>
                 <thead>
+                <tr>
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Age</th>
+                </tr>
                 </thead>
                 <tbody>
-                {people.map((person)=>(
+                {people.map((person) => (
                     <tr key={person.id}>
                         <td className="border">{person.name}</td>
                         <td className="border">{person.surname}</td>
