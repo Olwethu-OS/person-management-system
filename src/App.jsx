@@ -1,6 +1,6 @@
 import axios from "axios";
 import Input from "./Input.jsx";
-import {Route, Routes} from "react-router";
+import {Route, Routes, useNavigate, useNavigation} from "react-router";
 //import {BrowserRouter as Router,Route,Switch} from "react-router";
 import {useEffect, useState} from "react";
 import ViewAll from "./PeopleList.jsx";
@@ -12,6 +12,8 @@ const [name,setName]=useState(['']);
 const [surname,setSurname]=useState(['']);
 const [age,setAge]=useState([null]);
 const [editingPerson,setEditPerson] = useState(null);
+const navigate=useNavigate();
+
 
 
 /*creating a function that will set an object/object values
@@ -83,7 +85,6 @@ const createPerson=async (event)=>{
     };
 
 
-
   return (
     <div className="grid  grid-rows-2 justify-items-center">
 
@@ -137,7 +138,9 @@ const createPerson=async (event)=>{
         {/*    </tbody>*/}
         {/*</table>*/}
 
+
         <Routes>
+
             <Route path='/' element={
                                  <form className="grid shadow-lg p-6 rounded-md" onSubmit={(event)=>{
                                     event.preventDefault();
@@ -160,7 +163,7 @@ const createPerson=async (event)=>{
                                     <Input type="text" required placeholder="Enter your age" value={age} onChange={(event)=>setAge(event.target.value)}/>
                                     <div className="flex gap-30 my-10">
                                         <button className=" bg-blue-400 rounded-sm px-8 ml-2 cursor-pointer"  type="submit" >{editingPerson ? "update Person" :"Add Person"}</button>
-                                        <button className="bg-blue-400 rounded md px-8 cursor-pointer " type="button"  onClick={()=>{<ViewAll/>}} >View All</button>
+                                        <button className="bg-blue-400 rounded md px-8 cursor-pointer " type="button"  onClick={()=>{navigate('/view-people')}} >View All</button>
                                     </div>
 
                                 </form>
